@@ -17,7 +17,7 @@ deployment:
   replicaCount: 1
   image: ""
   containerPort: 8080
-  
+  env: {}
   resources:
     requests:
       cpu: "150m"
