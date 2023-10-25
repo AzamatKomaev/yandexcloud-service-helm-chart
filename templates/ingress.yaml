@@ -22,5 +22,5 @@ spec:
             service:
               name: {{ .Release.Name }}
               port:
-                name: {{ .Values.clusterip.port }}
+                name: {{ .Values.clusterip.targetPort }}
 {{- end }}
