@@ -20,4 +20,4 @@ upload chart:
     # Package helm chart and push it to registry
     - helm registry login cr.yandex -u iam -p $YC_IAM_TOKEN
     - helm package --version $CI_COMMIT_TAG ./
-    - ls
+    - helm push ${CI_PROJECT_NAME}-${CI_COMMIT_TAG}.tgz oci://cr.yandex/$REGISTRY_ID
