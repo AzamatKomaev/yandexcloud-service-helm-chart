@@ -18,6 +18,16 @@ deployment:
   image: ""
   containerPort: 8080
   env: {}
+  readinessProbe:
+    enabled: false
+    data:
+      httpGet:
+        path: /actuator/health
+        port: http
+      initialDelaySeconds: 50
+      periodSeconds: 10
+
+
   resources:
     requests:
       cpu: "150m"
