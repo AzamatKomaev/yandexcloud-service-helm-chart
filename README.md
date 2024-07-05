@@ -5,7 +5,7 @@
 ## Before installing
 
 This repository contains helm chart that could help you with deploying applications on Yandex.Cloud Kubernetes. Check [Habr article](https://habr.com/ru/articles/769046/) to get known about initial state of the chart. 
-Unless the chart has basic Kubernetes resources (like Deployment and Services) on your K8s cluster should be installed [external-secrets chart]([https://habr.com/ru/articles/769046/](https://github.com/external-secrets/external-secrets)). 
+Unless the chart has basic Kubernetes resources (like Deployment and Services) [external-secrets chart]([https://habr.com/ru/articles/769046/](https://github.com/external-secrets/external-secrets)) should be installed on your K8s cluster. 
 It will allow you to deploy CRD resources on your cluster (SecretStore and ExternalSecret). These resources are necessary if you want to integrate with [Yandex Certificate 
 Manager](https://yandex.cloud/en/docs/certificate-manager/) and [Yandex Lockbox](https://yandex.cloud/en/docs/lockbox/).
 
