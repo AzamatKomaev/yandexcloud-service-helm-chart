@@ -1,0 +1,66 @@
+clusterip:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http
+
+lockboxSecretStore:
+  enabled: true
+  externalSecret:
+    data:
+    - secretKey: DB_CONNECTION_URL
+      property: DB_CONNECTION_URL
+    - secretKey: DB_USERNAME
+      property: DB_USERNAME
+    - secretKey: FLYWAY_USER
+      property: DB_USERNAME
+    - secretKey: FLYWAY_PASSWORD
+      property: DB_PASSWORD
+    - secretKey: S3_ACCESS_KEY
+      property: S3_ACCESS_KEY
+    - secretKey: S3_SECRET_KEY
+      property: S3_SECRET_KEY
+    - secretKey: S3_BUCKET_NAME
+      property: S3_BUCKET_NAME
+
+deployment:
+  replicaCount: 1
+  image: ""
+  ports:
+  - name: http
+    containerPort: 8080
+    protocol: TCP
+
+  securityContext:
+    privileged: true
+
+  resources:
+    requests:
+      memory: "2500Mi"
+      cpu: "25m"
+    limits:
+      memory: "3000Mi"
+      cpu: "500m"
+
+  readinessProbe:
+    enabled: true
+    data:
+      httpGet:
+        path: /actuator/health
+        port: http
+      initialDelaySeconds: 50
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 1
+
+  env:
+  - name: S3_HOST
+    value: storage.yandexcloud.net
+  - name: S3_REGION
+    value: ru-central1
+
+ingress:
+  hosts:
+    - a.com
+    - b.com
