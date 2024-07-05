@@ -9,31 +9,21 @@ Unless the chart has basic Kubernetes resources (like Deployment and Services) o
 It will allow you to deploy CRD resources on your cluster (SecretStore and ExternalSecret). These resources are necessary if you want to integrate with [Yandex Certificate 
 Manager](https://yandex.cloud/en/docs/certificate-manager/) and [Yandex Lockbox](https://yandex.cloud/en/docs/lockbox/).
 
-## values.yaml
+## Values
 Check actual chart values [here](https://github.com/AzamatKomaev/yandexcloud-service-helm-chart/blob/main/values.yaml). 
 
-## templates
+## Templates
 In this section you can check information about all resources in the chart. 
 
-<b>cert-secret-store.yaml</b> - Optional SecretStore resource. We can use such type of resource
-to create integration with external API. That file contains configuration to connect to 
-Yandex Certificate Manager.
-
-<b>lockbox-secret-store.yaml</b> - Optional SecretStore resource. It contains almost the same
-configration as in cert-secret-store.yaml, but connect to Yandex Lockbox.
-
-<b>cert-external-secret.yaml</b> - Optional ExternalSecret resource. Uses SecretStore and
-Certificate ID to get TLS certificate and create K8s Secret.
-
-<b>lockbox-external-secret.yaml</b> - Optional ExternalSecret resource. Uses SecretStore and
-Secret ID to get secrets and create K8s Secret.
-
-<b>cluster.ip</b> - Required Service resource. Expose application on selected port.
-
-<b>deploy.yaml</b> - Required Deployment resource. Run selected replicas for application.
-
-<b>ingress.yaml</b> - Optional Ingress  resource. Can be used to expose application 
-under HTTPS.
+| Template | Kind | Type | Description |
+|----------|------|------|-------------|
+| cert-secret-store.yaml | SecretStore | Optional | We can use such type of resource to create integration with external API. That file contains configuration to connect to Yandex Certificate Manager. |
+| lockbox-secret-store.yaml | SecretStore | Optional | The template contains almost the same configration as in cert-secret-store.yaml, but connect to Yandex Lockbox. |
+| cert-external-secret.yaml | ExternalSecret | Optional | It uses SecretStore and Certificate ID to get TLS certificate and create K8s Secret. | 
+| lockbox-external-secret.yaml | ExternalSecret | Optional | Uses SecretStore and Secret ID to get secrets and create K8s Secret. |
+| clusterip.yaml | Service | Required | Expose application on selected port. | 
+| deploy.yaml | Deployment | Required | Run N replicas of application. |
+| ingress.yaml | Ingress | Optional | Can be used to expose application under HTTPS. |
 
 ## Installation
 
