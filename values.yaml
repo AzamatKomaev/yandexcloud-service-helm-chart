@@ -1,0 +1,31 @@
+lockboxSecretStore:
+  enabled: true
+  externalSecret:
+    secretId: ""
+    data: {}
+
+certificateSecretStore:
+  enabled: true
+  externalSecret:
+    certificateId: ""
+
+clusterip:
+  port: 80
+  targetPort: http
+
+deployment:
+  replicaCount: 1
+  image: ""
+  containerPort: 8080
+  
+  resources:
+    requests:
+      cpu: "150m"
+      memory: "400Mi"
+    limits:
+      cpu: "250m"
+      memory: "600Mi"
+
+ingress:
+  enabled: true
+  host: ""
