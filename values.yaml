@@ -11,6 +11,8 @@ certificateSecretStore:
 
 clusterip:
   ports:
+  # Port that you want to be used for ingress
+  # shold be first!
   - name: http
     protocol: TCP
     port: 80

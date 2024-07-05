@@ -13,14 +13,16 @@ spec:
       secretName: {{ .Release.Name }}-certificate-secret
   ingressClassName: {{ .Release.Name }}-class-resource
   rules:
-    - host: {{ .Values.ingress.host }}
+    {{- with (index .Values.clusterip.ports 0) }}
+    - host: {{ $.Values.ingress.host }}
       http:
         paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: {{ .Release.Name }}
+              name: {{ $.Release.Name }}
               port:
-                name: {{ .Values.clusterip.targetPort }}
+                name: {{ .name }}
+      {{- end }}
 {{- end }}
