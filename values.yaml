@@ -22,6 +22,7 @@ deployment:
   replicaCount: 1
   image: ""
   ports:
+  # Port name should be http. Check it in ingress.yaml (Hard-coded)
   - name: http
     containerPort: 8080
     protocol: TCP
@@ -50,6 +51,6 @@ deployment:
 ingress:
   enabled: true
   websocketSupport: false
-  host: ""
+  hosts: {}
   annotations: {}
 

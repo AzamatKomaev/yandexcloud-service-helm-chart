@@ -7,7 +7,7 @@ metadata:
   labels:
     {{- include "helm-chart.labels" . | nindent 4 }}
   annotations:
-    version: 0.1.7
+    version: 0.1.9
     {{- if .Values.ingress.websocketSupport -}}
     {{- include "ingress.websocketSupport" . | nindent 4 }}
     {{- end }}
@@ -15,12 +15,14 @@ metadata:
 spec:
   tls:
     - hosts:
-      - {{ .Values.ingress.host }}
+      {{- range .Values.ingress.hosts }}
+      - {{ . }}
+      {{- end }}
       secretName: {{ .Release.Name }}-certificate-secret
   ingressClassName: {{ .Release.Name }}-class-resource
   rules:
-    {{- with (index .Values.clusterip.ports 0) }}
-    - host: {{ $.Values.ingress.host }}
+    {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
       http:
         paths:
         - path: /
@@ -29,6 +31,6 @@ spec:
             service:
               name: {{ $.Release.Name }}
               port:
-                name: {{ .name }}
+                name: http
       {{- end }}
 {{- end }}
