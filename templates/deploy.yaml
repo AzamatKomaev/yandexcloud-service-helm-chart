@@ -23,7 +23,7 @@ spec:
           containerPort: {{ .Values.deployment.containerPort }}
         resources:
           {{- toYaml .Values.deployment.resources | nindent 10 }}
-        {{- if .Values.lockboxSecretStore.enabled }}
+        {{- if or (eq .Values.lockboxSecretStore.enabled true) (gt (len .Values.deployment.env) 0) }}
         env:
         {{- range .Values.lockboxSecretStore.externalSecret.data }}
         - name: {{ .secretKey }}
@@ -33,3 +33,9 @@ spec:
               key: {{ .secretKey }}
         {{- end }}
         {{- end }}
+
+        {{- range .Values.deployment.env }}
+        - name: {{ .name }}
+          value: {{ .value }}
+        {{- end }}        
+        
