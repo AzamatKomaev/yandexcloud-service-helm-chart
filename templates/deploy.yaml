@@ -23,7 +23,12 @@ spec:
         - name: {{ .name }}
           containerPort: {{ .containerPort }}
           protocol: {{ .protocol }}
-        {{- end }}        
+        {{- end }}     
+        {{- with .Values.deployment.securityContext }}
+        securityContext:
+          {{- toYaml . | nindent 10 }}
+          
+        {{- end }}
         resources:
           {{- toYaml .Values.deployment.resources | nindent 10 }}
 

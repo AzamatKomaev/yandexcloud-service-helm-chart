@@ -35,6 +35,9 @@ deployment:
       initialDelaySeconds: 50
       periodSeconds: 10
 
+  securityContext:
+    privileged: false
+
 
   resources:
     requests:
