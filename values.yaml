@@ -10,13 +10,19 @@ certificateSecretStore:
     certificateId: ""
 
 clusterip:
-  port: 80
-  targetPort: http
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http
 
 deployment:
   replicaCount: 1
   image: ""
-  containerPort: 8080
+  ports:
+  - name: http
+    containerPort: 8080
+    protocol: TCP
   env: {}
   readinessProbe:
     enabled: false

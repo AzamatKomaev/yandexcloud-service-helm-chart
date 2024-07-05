@@ -7,9 +7,11 @@ metadata:
     {{- include "helm-chart.labels" . | nindent 4 }}
 spec:
   ports:
-  - name: http
-    protocol: TCP
-    port: {{ .Values.clusterip.port }}
-    targetPort: {{ .Values.clusterip.targetPort }}
+  {{- range .Values.clusterip.ports }}
+  - name: {{ .name }}
+    protocol: {{ .protocol }}
+    port: {{ .port }}
+    targetPort: {{ .targetPort }}
+  {{- end }}  
   selector:
     {{- include "helm-chart.selectorLabels" . | nindent 4 }}

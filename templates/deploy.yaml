@@ -19,8 +19,11 @@ spec:
       - name: {{ .Release.Name }}-app
         image: {{ .Values.deployment.image }}
         ports:
-        - name: {{ .Values.clusterip.targetPort }}
-          containerPort: {{ .Values.deployment.containerPort }}
+        {{- range .Values.deployment.ports }}
+        - name: {{ .name }}
+          containerPort: {{ .containerPort }}
+          protocol: {{ .protocol }}
+        {{- end }}        
         resources:
           {{- toYaml .Values.deployment.resources | nindent 10 }}
 
