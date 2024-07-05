@@ -23,6 +23,14 @@ spec:
           containerPort: {{ .Values.deployment.containerPort }}
         resources:
           {{- toYaml .Values.deployment.resources | nindent 10 }}
+
+        {{- if .Values.deployment.readinessProbe.enabled -}}
+        {{- with .Values.deployment.readinessProbe.data }}
+        readinessProbe:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- end }}
+
         {{- if or (eq .Values.lockboxSecretStore.enabled true) (gt (len .Values.deployment.env) 0) }}
         env:
         {{- range .Values.lockboxSecretStore.externalSecret.data }}
