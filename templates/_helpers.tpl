@@ -1,3 +1,21 @@
+{{- define "ingress.websocketSupport" -}}
+nginx.org/websocket-services: "rsocket-service"
+nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+nginx.ingress.kubernetes.io/server-snippets: |
+ location / {
+  proxysetheader Upgrade $httpupgrade;
+  proxyhttpversion 1.1;
+  proxysetheader X-Forwarded-Host $httphost;
+  proxysetheader X-Forwarded-Proto $scheme;
+  proxysetheader X-Forwarded-For $remoteaddr;
+  proxysetheader Host $host;
+  proxysetheader Connection "upgrade";
+  proxycachebypass $httpupgrade;
+  }
+{{- end }}
+
+
 {{/*
 Expand the name of the chart.
 */}}

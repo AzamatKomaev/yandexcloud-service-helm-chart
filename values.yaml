@@ -46,4 +46,7 @@ deployment:
 
 ingress:
   enabled: true
+  websocketSupport: false
   host: ""
+  annotations: {}
+

@@ -6,6 +6,12 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "helm-chart.labels" . | nindent 4 }}
+  annotations:
+    version: 0.1.7
+    {{- if .Values.ingress.websocketSupport -}}
+    {{- include "ingress.websocketSupport" . | nindent 4 }}
+    {{- end }}
+
 spec:
   tls:
     - hosts:
