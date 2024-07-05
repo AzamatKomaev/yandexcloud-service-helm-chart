@@ -10,7 +10,7 @@ upload chart:
   script:
     # Set up utils and get iam token
     - apt update && apt install -y curl
-    - wget -O get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && chmod +x ./get_helm.sh && ./get_helm.sh
+    - curl -o get-helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && chmod +x ./get_helm.sh && ./get_helm.sh
     - curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
     - echo $YC_AUTH_KEY_JSON | base64 --decode > ./key.json
     - ~/yandex-cloud/bin/yc config profile create admin
